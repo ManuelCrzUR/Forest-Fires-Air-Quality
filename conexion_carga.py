@@ -52,12 +52,12 @@ try:
     "version", "bright_t31", "frp", "daynight", "type"]
     
     # Consultar el primer dato de la tabla modis_2020_colombia
-    print("Verificar que existan datos en DB para no añadirlos de nuevo" + "\n")
-    cursor.execute("SELECT * FROM modis_2020_colombia LIMIT 1")
-    first_row = cursor.fetchone()  # Obtener la primera fila
+    print("Verificar que existan datos en DB para no añadirlos de nuevo, verificando la tabla modis_all, el pirmer dato" + "\n")
+    cursor.execute("SELECT * FROM modis_all LIMIT 1")
+    first_row = cursor.fetchone()
 
     if first_row:
-        print("Primer dato de la tabla modis_2020_colombia:", first_row)
+        print("Datos de la tabla modis_all:", first_row)
     else:
         print("La tabla está vacía")
         c = 0
