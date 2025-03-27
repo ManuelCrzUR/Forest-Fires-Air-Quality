@@ -163,3 +163,6 @@ SELECT * FROM fire_data_2019
 UNION ALL
 SELECT * FROM fire_data_2020;
 
+-- Consulta de ususario para conexión de python:
+
+select current_user,now()
