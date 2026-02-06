@@ -1,71 +1,59 @@
-# 🌲 Forest Fires & Air Quality Pipeline
+# 🔥 Forest Fire & Air Quality Analysis Lab
 
 ![Python](https://img.shields.io/badge/python-3.8+-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-239120?style=for-the-badge&logo=plotly&logoColor=white)
 
-> 🚀 **Pipeline ETL de datos satelitales (MODIS)** para el monitoreo de incendios forestales en Brasil, Colombia y Chile (2010-2020), preparando la data para análisis de impacto ambiental y calidad del aire.
+> 🚀 **Plataforma de análisis geoespacial y pipeline ETL** para el monitoreo masivo de incendios forestales en Sudamérica (Colombia, Brasil, Chile) utilizando datos satelitales **NASA MODIS** (2010-2020).
 
-## 📊 Key Features
-*   **Ingesta Masiva:** Automatización de carga de datos satelitales (MODIS) históricos.
-*   **Gestión Geoespacial:** Procesamiento de coordenadas y brillo (brightness/FRP) para detección de focos de calor.
-*   **Arquitectura Escalable:** Diseño en base de datos Relacional (PostgreSQL) con particionado lógico por país y año.
+## 📊 Vista General
+Este proyecto resuelve el desafío de procesar y visualizar grandes volúmenes de datos ambientales (>8.7 millones de registros). Proporciona herramientas para la ingesta de datos, análisis estadístico y una visualización interactiva de nivel profesional.
 
-## 🛠️ Project Architecture
+## ✨ Características Principales
+*   **Pipeline ETL Masivo:** Ingesta automatizada de archivos CSV históricos hacia bases de datos estructuradas (PostgreSQL/SQLite).
+*   **Dashboard Interactivo (v2.0):** Visualización tipo laboratorio con mapas de calor (Heatmaps) espaciales y selector temporal por año.
+*   **Análisis Científico:** Extracción de métricas de intensidad (FRP) y temperatura de brillo (Brightness) por país y año.
+*   **Arquitectura Dual:** Compatible con PostgreSQL para entornos de producción y SQLite para portabilidad/demos rápidas.
 
-```mermaid
-graph LR
-    A[MODIS CSV Files] -->|Extract| B(Python ETL Script)
-    B -->|Transform & Load| C[(PostgreSQL Database)]
-    C --> D{Tables Per Year/Country}
-    D -->|Union| E[Unified Views]
-    E -->|Analysis| F[Air Quality Impact]
-```
-
-## 🧠 Solución Técnica
-Este repositorio implementa un pipeline de Ingeniería de Datos que resuelve el problema de la dispersión de datos climáticos:
-
-1.  **Extraction:** Script automatizado (`conexion_carga.py`) que itera sobre datasets anuales.
-2.  **Schema Design:** Script SQL (`Tables_setup.sql`) que normaliza la estructura de datos para consistencia espacial y temporal.
-3.  **Validation:** Verificación de integridad de datos para evitar duplicados en cargas incrementales.
-
-## 🚀 Getting Started
-
-### Prerequisitos
-*   Python 3.8+
-*   PostgreSQL 12+
-*   Archivo `.env` configurado (ver security best practices).
-
-### Instalación
-1.  Clonar el repositorio:
-    ```bash
-    git clone https://github.com/ManuelCrzUR/Forest-Fires-Air-Quality.git
-    ```
-2.  Instalar dependencias:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Uso
-1.  **Setup de Base de Datos:**
-    Ejecutar el script SQL para crear las tablas necesarias.
-    ```bash
-    psql -U postgres -d forest_fires -f Tables_setup.sql
-    ```
-
-2.  **Ejecutar ETL:**
-    ```bash
-    python refactored_etl.py
-    ```
-
-## 📂 Estructura del Proyecto
+## 🛠️ Estructura del Proyecto
 ```text
-├── data/               # Datasets crudos (ignorado en git)
-├── Tables_setup.sql    # Definición de esquemas DDL
-├── conexion_carga.py   # ETL Script original
-├── refactored_etl.py   # ETL Script optimizado (New!)
+├── data/                       # Datasets crudos (Ignorado en Git)
+├── Tables_setup.sql            # Esquema SQL para PostgreSQL
+├── conexion_carga.py           # Script ETL original (PostgreSQL)
+├── demo_sqlite.py              # Pipeline portátil (SQLite)
+├── visualizar_datos.py         # Script de análisis estadístico y gráficos
+├── mapa_interactivo.py         # Generador del Dashboard interactivo
+├── dashboard_incendios_pro.html # Visualización final (NASA-Style)
 └── README.md
 ```
 
-## 🤝 Contact
-*   **Manuel Cruz** - [GitHub](https://github.com/ManuelCrzUR)
+## 🚀 Cómo Empezar
+
+### 1. Clonar y Preparar
+```bash
+git clone https://github.com/ManuelCrzUR/Forest-Fires-Air-Quality.git
+cd Forest-Fires-Air-Quality
+pip install pandas plotly matplotlib seaborn
+```
+
+### 2. Ejecutar el Pipeline (Portátil)
+Si quieres probar el sistema de inmediato con los datos locales:
+```bash
+python demo_sqlite.py
+```
+
+### 3. Generar el Análisis Visual
+```bash
+python visualizar_datos.py
+python mapa_interactivo.py
+```
+
+## 📈 Visualizaciones
+El proyecto genera un Dashboard interactivo (`dashboard_incendios_pro.html`) que permite:
+*   Seleccionar años específicos para ver la distribución de focos de calor.
+*   Visualizar la intensidad térmica con una escala de colores normalizada.
+*   Analizar estadísticas agregadas de más de 10 años de historia ambiental.
+
+---
+**Manuel Santiago Cruz Garrote**  
+*Estudiante de Matemáticas Aplicadas y Ciencias de la Computación - Universidad del Rosario*

@@ -1,0 +1,19 @@
+# Datos y bases de datos
+data/
+*.db
+*.sqlite
+
+# Resultados Visuales
+*.png
+*.html
+!dashboard_incendios_pro.html # Permitimos subir el dashboard como demo final
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+.vscode/
